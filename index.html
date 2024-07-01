@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap"
+      rel="stylesheet"
+    />
+    <title>Frosch</title>
+  </head>
+  <body>
+    <main>
+      <section id="game-intro">
+        <h1 class="intro__title">Frosch</h1>
+        <img src="./assets/Froggo/Gifs/Idle.gif" alt="" class="intro__img" />
+        <button id="intro__button-start">Los geht's</button>
+      </section>
+      <section id="game-container">
+        <div id="game-stats">
+          <div class="stats__item">
+            <span class="stats__label">Time</span>
+            <span class="stats__value" id="stats__time"></span>
+          </div>
+          <div class="stats__item">
+            <span class="stats__label">Score</span>
+            <span class="stats__value" id="stats__score"></span>
+          </div>
+          <div class="stats__item">
+            <span class="stats__label">Lives</span>
+            <span class="stats__value" id="stats__lives"></span>
+          </div>
+        </div>
+        <div id="game-screen">
+          <div class="lane" id="lane-1">Lane 1</div>
+          <div class="lane" id="lane-2">Lane 2</div>
+          <div class="lane" id="lane-3">Lane 3</div>
+          <div class="lane" id="lane-4">Lane 4</div>
+          <div class="lane" id="lane-5">Lane 5</div>
+          <div class="lane" id="lane-6">Lane 6</div>
+          <div class="screen__start">Start</div>
+        </div>
+      </section>
+      <section id="game-end"></section>
+    </main>
+    <script type="text/javascript" src="js/component.js"></script>
+    <script type="text/javascript" src="js/player.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+  </body>
+</html>
