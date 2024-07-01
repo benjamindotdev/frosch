@@ -35,19 +35,33 @@
           </div>
         </div>
         <div id="game-screen">
-          <div class="lane" id="lane-1">Lane 1</div>
-          <div class="lane" id="lane-2">Lane 2</div>
-          <div class="lane" id="lane-3">Lane 3</div>
-          <div class="lane" id="lane-4">Lane 4</div>
-          <div class="lane" id="lane-5">Lane 5</div>
           <div class="lane" id="lane-6">Lane 6</div>
-          <div class="screen__start">Start</div>
+          <div class="lane" id="lane-5">Lane 5</div>
+          <div class="lane" id="lane-4">Lane 4</div>
+          <div class="lane" id="lane-3">Lane 3</div>
+          <div class="lane" id="lane-2">Lane 2</div>
+          <div class="lane" id="lane-1">Lane 1</div>
+          <div class="screen__start"></div>
         </div>
       </section>
-      <section id="game-end"></section>
+      <section id="game-over">
+        <h1 class="intro__title">You suck</h1>
+        <img src="./assets/Froggo/Gifs/Death.gif" alt="" class="game-over" />
+        <button class="end__button-restart">Nochmal</button>
+      </section>
+      <section id="game-victory">
+        <h1 class="intro__title">Gut gemacht</h1>
+        <img
+          src="./assets/Froggo/Gifs/Jump.gif"
+          alt=""
+          class="gameVictory__img"
+        />
+        <button class="end__button-restart">Nochmal</button>
+      </section>
     </main>
     <script type="text/javascript" src="js/component.js"></script>
     <script type="text/javascript" src="js/player.js"></script>
+    <script type="text/javascript" src="js/lane.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
   </body>

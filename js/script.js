@@ -1,11 +1,18 @@
 window.onload = function () {
-  const startButton = document.getElementById("intro__button-start");
+  const startButton = document.querySelector("#intro__button-start");
+  const restartButtons = document.querySelectorAll(".end__button-restart");
   let game = null;
 
   startButton.addEventListener("click", function () {
     game = new Game();
     game.start();
   });
+
+  restartButtons.forEach((button) =>
+    button.addEventListener("click", function () {
+      game.restartGame();
+    })
+  );
 
   const handleKeyDown = (event) => {
     const key = event.key;

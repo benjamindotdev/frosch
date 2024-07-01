@@ -120,6 +120,24 @@ button:hover {
   border: 2px solid var(--green);
 }
 
-#game-end {
+#game-over {
   display: none;
+}
+
+#game-victory {
+  display: none;
+}
+
+.game-over__img {
+  width: 300px;
+  height: auto;
+}
+
+.gameVictory__img {
+  width: 300px;
+  height: auto;
+}
+
+.ghost {
+  opacity: 50%;
 }
