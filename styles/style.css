@@ -69,9 +69,6 @@ button:hover {
   color: var(--silver);
 }
 
-#game-intro {
-}
-
 .intro__title {
   font-size: 4em;
 }
