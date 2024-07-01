@@ -8,6 +8,7 @@ class Game {
     this.timeStat = document.querySelector("#stats__time");
     this.scoreStat = document.querySelector("#stats__score");
     this.livesStat = document.querySelector("#stats__lives");
+    this.laneElements = [];
     this.player = new Player(
       this.gameContainer,
       800,
@@ -37,9 +38,14 @@ class Game {
       let type = types[Math.floor(Math.random() * types.length)];
       const lane = new Lane(i, type, [], []);
       const laneElement = document.querySelector(`#lane-${i}`);
+      this.laneElements.push(lane);
       laneElement.innerHTML = lane.type;
       const texture = lane.texture();
       laneElement.style.backgroundImage = `url("./assets/PNG/${texture}")`;
+      console.log(lane);
+      console.log(laneElement);
+      //lane.addEnemy();
+
       this.gameScreen.appendChild(laneElement);
     }
   }
@@ -49,10 +55,10 @@ class Game {
     this.gameContainer.style.height = this.height + "px";
     this.startScreen.style.display = "none";
     this.gameContainer.style.display = "flex";
+    this.makeLanes();
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
-    this.makeLanes();
   }
 
   gameLoop() {

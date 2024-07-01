@@ -1,9 +1,9 @@
 class Lane {
-  constructor(number, type, enemies, obstacles) {
+  constructor(number, type) {
     this.number = number;
     this.type = type;
-    this.enemies = enemies;
-    this.obstacles = obstacles;
+    this.enemies = [];
+    this.obstacles = [];
   }
 
   texture() {
@@ -20,4 +20,34 @@ class Lane {
         return "Concrete/s2 Concrete Lines 3 Grey Hor.png";
     }
   }
+
+  addEnemy() {
+    const enemy = new Enemy(
+      this.gameScreen,
+      0,
+      0,
+      100,
+      100,
+      "./assets/Enemies/Vehicles/PNG/Cars/van.png",
+      1,
+      1
+    );
+    const enemyElement = document.createElement("img");
+    this.appendChild(enemyElement);
+    this.enemies.push(enemy);
+  }
+
+  //addObstacle(obstacle) {
+  //  this.obstacles.push(obstacle);
+  //}
+
+  // removeEnemy(enemy) {
+  //   const index = this.enemies.indexOf(enemy);
+  //   this.enemies.splice(index, 1);
+  // }
+
+  //removeObstacle(obstacle) {
+  //  const index = this.obstacles.indexOf(obstacle);
+  //  this.obstacles.splice(index, 1);
+  //}
 }
