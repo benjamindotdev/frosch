@@ -1,6 +1,6 @@
 class Player extends Component {
-  constructor(gameScreen, left, top, width, height, updatePosition, src) {
-    super(gameScreen, width, height, left, top, updatePosition);
+  constructor(container, left, top, width, height, updatePosition, src) {
+    super(container, width, height, left, top, updatePosition);
     this.directionX = 0;
     this.directionY = 0;
     this.element;
@@ -11,37 +11,30 @@ class Player extends Component {
     this.left += this.directionX * 10;
     this.top += this.directionY * 5;
 
-    // Get the game screen's left and top offset
-    const gameScreenRect = this.gameScreen.getBoundingClientRect();
-    const gameScreenLeftOffset = gameScreenRect.left;
-    const gameScreenTopOffset = gameScreenRect.top;
+    const containerRect = this.container.getBoundingClientRect();
+    const containerLeftOffset = containerRect.left;
+    const containerTopOffset = containerRect.top;
 
-    // Adjust the left boundary check using the game screen's left offset
-    if (this.left < gameScreenLeftOffset) {
-      this.left = gameScreenLeftOffset;
+    if (this.left < containerLeftOffset) {
+      this.left = containerLeftOffset;
     }
 
-    // Adjust the top boundary check using the game screen's top offset
-    if (this.top < gameScreenTopOffset) {
-      this.top = gameScreenTopOffset;
+    if (this.top < containerTopOffset) {
+      this.top = containerTopOffset;
     }
 
-    // Adjust the right boundary check to account for game screen's left offset
     if (
       this.left + this.width >
-      this.gameScreen.offsetWidth + gameScreenLeftOffset
+      this.container.offsetWidth + containerLeftOffset
     ) {
-      this.left =
-        this.gameScreen.offsetWidth + gameScreenLeftOffset - this.width;
+      this.left = this.container.offsetWidth + containerLeftOffset - this.width;
     }
 
-    // Adjust the bottom boundary check to account for game screen's top offset
     if (
       this.top + this.height >
-      this.gameScreen.offsetHeight + gameScreenTopOffset
+      this.container.offsetHeight + containerTopOffset
     ) {
-      this.top =
-        this.gameScreen.offsetHeight + gameScreenTopOffset - this.height;
+      this.top = this.container.offsetHeight + containerTopOffset - this.height;
     }
 
     this.updatePosition();

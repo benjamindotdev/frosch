@@ -1,6 +1,6 @@
 class Component {
-  constructor(gameScreen, width, height, left, top, src) {
-    this.gameScreen = gameScreen;
+  constructor(container, width, height, left, top, src) {
+    this.container = container;
     this.width = width;
     this.height = height;
     this.left = left;
@@ -12,7 +12,7 @@ class Component {
     this.element.style.height = this.height + "px";
     this.element.style.left = this.left + "px";
     this.element.style.top = this.top + "px";
-    this.gameScreen.appendChild(this.element);
+    this.container.appendChild(this.element);
   }
 
   updatePosition() {

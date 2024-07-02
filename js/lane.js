@@ -2,6 +2,9 @@ class Lane {
   constructor(number, type) {
     this.number = number;
     this.type = type;
+    this.height = 100;
+    this.width = 800;
+    this.element = document.querySelector("#lane-" + number);
     this.enemies = [];
     this.obstacles = [];
   }
@@ -16,35 +19,39 @@ class Lane {
         return "Bricks/s2 Brick 01 Red.png";
       case "grass":
         return "Grass/s2 Grass 01 Green.png";
-      case "tram":
+      case "pavement":
         return "Concrete/s2 Concrete Lines 3 Grey Hor.png";
     }
   }
 
   addEnemy() {
+    const direction = this.number % 2 === 0 ? -1 : 1;
     const enemy = new Enemy(
-      this.gameScreen,
-      0,
-      0,
-      100,
-      100,
+      this.element,
+      direction === 1 ? 80 : 800,
+      this.element.offsetTop + 10,
+      80,
+      80,
       "./assets/Enemies/Vehicles/PNG/Cars/van.png",
-      1,
-      1
+      Math.random() * 2 + 1,
+      direction
     );
     const enemyElement = document.createElement("img");
-    this.appendChild(enemyElement);
+    direction === -1 ? enemyElement.classList.add("reverse") : "";
+    console.log(enemyElement);
+    this.element.appendChild(enemyElement);
     this.enemies.push(enemy);
+  }
+
+  removeEnemy(enemy) {
+    const index = this.enemies.indexOf(enemy);
+    this.enemies.splice(index, 1);
+    this.element.removeChild(enemy.element);
   }
 
   //addObstacle(obstacle) {
   //  this.obstacles.push(obstacle);
   //}
-
-  // removeEnemy(enemy) {
-  //   const index = this.enemies.indexOf(enemy);
-  //   this.enemies.splice(index, 1);
-  // }
 
   //removeObstacle(obstacle) {
   //  const index = this.obstacles.indexOf(obstacle);

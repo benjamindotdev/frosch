@@ -1,31 +1,26 @@
 class Enemy extends Component {
-  constructor(gameScreen, left, top, width, height, src, speed, directionX) {
-    super(gameScreen, width, height, left, top, src);
+  constructor(container, left, top, width, height, src, speed, directionX) {
+    super(container, width, height, left, top, src);
     this.directionX = directionX;
-    this.directionY = 0;
     this.speed = speed;
+    this.markForRemoval = false;
+    this.element.classList.add("enemy");
   }
 
   move() {
-    this.left += this.directionX * speed;
-    this.top += this.directionY * 0;
+    this.left += this.directionX * this.speed;
 
-    const gameScreenRect = this.gameScreen.getBoundingClientRect();
-    const gameScreenLeftOffset = gameScreenRect.left;
-    const gameScreenTopOffset = gameScreenRect.top;
+    const containerRect = this.container.getBoundingClientRect();
+    const containerLeftOffset = containerRect.left;
+    const containerRightLimit =
+      this.container.offsetWidth + containerLeftOffset;
 
-    if (this.left < gameScreenLeftOffset) {
-      this.left = gameScreenLeftOffset;
-      this.directionX = 1;
+    if (this.left + this.width < containerLeftOffset) {
+      this.markForRemoval = true;
     }
 
-    if (
-      this.left + this.width >
-      this.gameScreen.offsetWidth + gameScreenLeftOffset
-    ) {
-      this.left =
-        this.gameScreen.offsetWidth + gameScreenLeftOffset - this.width;
-      this.directionX = -1;
+    if (this.left > containerRightLimit) {
+      this.markForRemoval = true;
     }
 
     this.updatePosition();

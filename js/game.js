@@ -6,8 +6,6 @@ class Game {
     this.gameOverScreen = document.querySelector("#game-over");
     this.gameVictoryScreen = document.querySelector("#game-victory");
     this.timeStat = document.querySelector("#stats__time");
-    this.scoreStat = document.querySelector("#stats__score");
-    this.livesStat = document.querySelector("#stats__lives");
     this.laneElements = [];
     this.player = new Player(
       this.gameContainer,
@@ -20,12 +18,7 @@ class Game {
     this.height = 800;
     this.width = 800;
     this.lanes = [];
-    this.enemies = [];
-    this.items = [];
-    this.obstacles = [];
-    this.score = 0;
     this.timeRemaining = 60;
-    this.lives = 5;
     this.playerHasWon = false;
     this.gameIsOver = false;
     this.gameIntervalId = null;
@@ -33,19 +26,13 @@ class Game {
   }
 
   makeLanes() {
-    const types = ["road", "water", "bike", "grass", "tram"];
+    const types = ["road", "water", "bike", "grass", "pavement"];
     for (let i = 6; i > 0; i--) {
       let type = types[Math.floor(Math.random() * types.length)];
-      const lane = new Lane(i, type, [], []);
+      const lane = new Lane(i, type);
       const laneElement = document.querySelector(`#lane-${i}`);
-      this.laneElements.push(lane);
-      laneElement.innerHTML = lane.type;
-      const texture = lane.texture();
-      laneElement.style.backgroundImage = `url("./assets/PNG/${texture}")`;
-      console.log(lane);
-      console.log(laneElement);
-      //lane.addEnemy();
-
+      laneElement.style.backgroundImage = `url("./assets/PNG/${lane.texture()}")`;
+      this.lanes.push(lane);
       this.gameScreen.appendChild(laneElement);
     }
   }
@@ -62,9 +49,7 @@ class Game {
   }
 
   gameLoop() {
-    this.livesStat.textContent = this.lives;
     this.timeStat.textContent = Math.floor(this.timeRemaining);
-    this.scoreStat.textContent = this.score;
     if (this.lives <= 0 || this.timeRemaining <= 0) {
       this.endGame();
     } else if (this.player.top <= 125) {
@@ -77,12 +62,27 @@ class Game {
 
   update() {
     this.player.move();
+    this.lanes.forEach((lane) => {
+      if (lane.enemies.length === 0) {
+        lane.addEnemy();
+      }
+      lane.enemies.forEach((enemy) => {
+        if (this.player.didCollide(enemy)) {
+          this.player.top = 800;
+          this.player.left = 400;
+        } else if (enemy.markForRemoval) {
+          lane.removeEnemy(enemy);
+        }
+        enemy.move();
+      });
+    });
   }
 
   victory() {
     this.playerHasWon = true;
     this.gameContainer.style.display = "none";
     this.gameVictoryScreen.style.display = "flex";
+    this.player.element.remove();
     clearInterval(this.gameIntervalId);
   }
 
@@ -90,6 +90,7 @@ class Game {
     this.gameIsOver = true;
     this.gameContainer.style.display = "none";
     this.gameOverScreen.style.display = "flex";
+    this.player.element.remove();
     clearInterval(this.gameIntervalId);
   }
 
@@ -105,9 +106,7 @@ class Game {
     this.gameOverScreen.style.display = "none";
     this.gameVictoryScreen.style.display = "none";
     this.gameContainer.style.display = "flex";
-    this.lives = 5;
     this.timeRemaining = 60;
-    this.score = 0;
     this.gameIsOver = false;
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();

@@ -117,7 +117,17 @@ button:hover {
 .lane {
   height: 100px;
   width: 100%;
-  border: 2px solid var(--green);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.enemy {
+  align-self: center;
+}
+
+.reverse {
+  transform: scaleX(-1);
 }
 
 #game-over {
@@ -131,6 +141,17 @@ button:hover {
 .game-over__img {
   width: 300px;
   height: auto;
+}
+
+#game-victory {
+  height: 600px;
+  padding: 50px;
+  border-radius: 16px;
+  background-color: var(--green);
+  color: var(--blue);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .gameVictory__img {
