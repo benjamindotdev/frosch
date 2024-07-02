@@ -1,4 +1,12 @@
 window.onload = function () {
+  const startSong = new Audio(
+    "./assets/sounds/T. Bless - Froggy Fraud Adventure.mp3"
+  );
+  startSong.loop = true;
+  startSong.play();
+  const gameSong = new Audio(
+    "./assets/sounds/Ian Post - Breaking Point - No FX.mp3"
+  );
   const startButton = document.querySelector("#intro__button-start");
   const restartButtons = document.querySelectorAll(".end__button-restart");
   let game = null;
@@ -6,6 +14,8 @@ window.onload = function () {
   startButton.addEventListener("click", function () {
     game = new Game();
     game.start();
+    startSong.pause();
+    gameSong.play();
   });
 
   restartButtons.forEach((button) =>

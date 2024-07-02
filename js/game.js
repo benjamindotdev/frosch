@@ -38,6 +38,8 @@ class Game {
   }
 
   start() {
+    const startAudio = document.createElement("audio");
+    startAudio.src = "./assets/Sounds/game-start-6104.mp3";
     this.gameContainer.style.width = this.width + "px";
     this.gameContainer.style.height = this.height + "px";
     this.startScreen.style.display = "none";
@@ -46,6 +48,7 @@ class Game {
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
+    startAudio.play();
   }
 
   gameLoop() {
