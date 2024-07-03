@@ -18,7 +18,7 @@
 
 body {
   color: #e0e1dd;
-  background: #0d1b2a;
+  background: var(--silver);
 }
 
 h1 {
@@ -50,6 +50,8 @@ section {
   align-items: center;
   border: 5px solid #fff;
   border-radius: 16px;
+  filter: drop-shadow(10px 10px 0px var(--blue));
+  transition: all 0.3s;
 }
 
 .info-screen {
@@ -59,26 +61,30 @@ section {
 }
 
 button {
-  background: #fff;
+  background: var(--orange);
   color: #000;
   font-size: 1.5em;
   padding: 1em 2em;
   border: none;
   border-radius: 0.5em;
   cursor: pointer;
+  transition: all 0.3s;
 }
 
 button:hover {
   background: #000;
-  color: #fff;
+  color: var(--orange);
+  filter: drop-shadow(10px 10px 0px var(--green));
 }
 
 #game-intro {
-  background: var(--orange);
+  background: #fff;
 }
 
 .intro__title {
   font-size: 4em;
+  color: var(--green);
+  filter: drop-shadow(10px 10px 0px var(--blue));
 }
 
 .intro__img {
@@ -102,12 +108,17 @@ button:hover {
   justify-content: space-evenly;
 }
 
+.stats__label {
+  font-size: 0.5em;
+}
+
 .stats__item {
   color: #000;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 2em;
 }
 
 #game-screen {

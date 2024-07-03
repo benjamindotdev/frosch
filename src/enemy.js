@@ -12,18 +12,16 @@ class Enemy extends Component {
     this.left += this.directionX * this.speed;
 
     const containerRect = this.container.getBoundingClientRect();
-    const containerLeftOffset = containerRect.left;
-    const containerRightLimit =
-      this.container.offsetWidth + containerLeftOffset;
 
-    if (this.left + this.width < containerLeftOffset) {
+    console.log(containerRect);
+
+    if (
+      this.left + this.width > containerRect.right ||
+      this.left < containerRect.left
+    ) {
       this.markForRemoval = true;
+    } else {
+      this.updatePosition();
     }
-
-    if (this.left > containerRightLimit) {
-      this.markForRemoval = true;
-    }
-
-    this.updatePosition();
   }
 }

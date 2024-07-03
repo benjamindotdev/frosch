@@ -7,9 +7,9 @@ window.onload = function () {
   let game = null;
 
   startButton.addEventListener("click", function () {
+    startSong.pause();
     game = new Game();
     game.start();
-    startSong.pause();
   });
 
   restartButtons.forEach((button) =>

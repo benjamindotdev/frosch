@@ -9,9 +9,9 @@ class Game {
     this.levelStat = document.querySelector("#stats__level");
     this.laneElements = [];
     this.player = new Player(
-      this.gameContainer,
-      800,
-      800,
+      this.gameScreen,
+      400,
+      750,
       42,
       24,
       "./assets/images/player/Idle.gif"
@@ -27,10 +27,12 @@ class Game {
     this.gameIntervalId = null;
     this.gameLoopFrequency = Math.round(1000 / 60);
     this.enemyLoopFrequency = Math.round(1000 / 10);
+    this.startSound = new Audio("../public/assets/sounds/game-start.mp3");
     this.gameSong = new Audio("../public/assets/sounds/game-play.mp3");
     this.victorySong = new Audio("../public/assets/sounds/victory.mp3");
     this.gameOverSong = new Audio("../public/assets/sounds/game-over.mp3");
     this.hitSound = new Audio("../public/assets/sounds/hit.mp3");
+    this.highScore = 0;
   }
 
   makeLanes() {
@@ -46,8 +48,8 @@ class Game {
   }
 
   start() {
-    const startAudio = document.createElement("audio");
-    startAudio.src = "../public/assets/Sounds/game-start.mp3";
+    this.startSound.play();
+    this.gameSong.play();
     this.gameContainer.style.width = this.width + "px";
     this.gameContainer.style.height = this.height + "px";
     this.startScreen.style.display = "none";
@@ -131,6 +133,8 @@ class Game {
     this.gameContainer.style.display = "none";
     this.gameOverScreen.style.display = "flex";
     this.player.element.remove();
+    this.level > this.highScore ? (this.highScore = this.level) : null;
+    this.level = 1;
     this.lanes.forEach((lane) => {
       lane.enemies.forEach((enemy) => {
         enemy.element.remove();
@@ -142,11 +146,12 @@ class Game {
   }
 
   restartGame() {
+    this.startSound.play();
     this.gameSong.play();
     this.player = new Player(
       this.gameContainer,
-      800,
-      800,
+      450,
+      750,
       42,
       24,
       "./assets/images/player/Idle.gif"

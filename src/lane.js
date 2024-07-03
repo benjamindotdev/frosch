@@ -11,15 +11,22 @@ class Lane {
 
   enemy(type) {
     const random = Math.ceil(Math.random() * 3);
-    return `./assets/images/enemies/${type}/${random}.png`;
+    return `./assets/images/enemies/${type}/${random}.${
+      type === "pavement" ? "gif" : "png"
+    }`;
   }
 
   addEnemy(randomPosition) {
-    this.enemySound.play();
+    //this.enemySound.play();
     const direction = this.number % 2 === 0 ? -1 : 1;
+    const containerRect = this.element.getBoundingClientRect();
     const enemy = new Enemy(
       this.element,
-      randomPosition ? Math.random() * 800 : direction === -1 ? 800 : 80,
+      randomPosition
+        ? Math.random() * 800
+        : direction === -1
+        ? containerRect.right
+        : containerRect.left,
       this.element.offsetTop + 10,
       80,
       80,

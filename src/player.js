@@ -14,26 +14,20 @@ class Player extends Component {
     const containerLeftOffset = containerRect.left;
     const containerTopOffset = containerRect.top;
 
-    if (this.left < containerLeftOffset) {
-      this.left = containerLeftOffset;
+    if (this.left < 0) {
+      this.left = 0;
     }
 
-    if (this.top < containerTopOffset) {
-      this.top = containerTopOffset;
+    if (this.top < 0) {
+      this.top = 0;
     }
 
-    if (
-      this.left + this.width >
-      this.container.offsetWidth + containerLeftOffset
-    ) {
-      this.left = this.container.offsetWidth + containerLeftOffset - this.width;
+    if (this.left + this.width > this.container.offsetWidth) {
+      this.left = this.container.offsetWidth - this.width;
     }
 
-    if (
-      this.top + this.height >
-      this.container.offsetHeight + containerTopOffset
-    ) {
-      this.top = this.container.offsetHeight + containerTopOffset - this.height;
+    if (this.top + this.height > this.container.offsetHeight) {
+      this.top = this.container.offsetHeight - this.height;
     }
 
     this.updatePosition();
