@@ -23,6 +23,7 @@ class Game {
     this.gameIsOver = false;
     this.gameIntervalId = null;
     this.gameLoopFrequency = Math.round(1000 / 60);
+    this.enemyLoopFrequency = Math.round(1000 / 2);
   }
 
   makeLanes() {
@@ -48,6 +49,9 @@ class Game {
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
+    this.enemyLoopFrequency = setInterval(() => {
+      this.enemyLoop();
+    }, this.enemyLoopFrequency);
     startAudio.play();
   }
 
@@ -63,8 +67,7 @@ class Game {
     }
   }
 
-  update() {
-    this.player.move();
+  enemyLoop() {
     this.lanes.forEach((lane) => {
       if (lane.enemies.length === 0) {
         lane.addEnemy();
@@ -73,9 +76,18 @@ class Game {
         if (this.player.didCollide(enemy)) {
           this.player.top = 800;
           this.player.left = 400;
-        } else if (enemy.markForRemoval) {
+        }
+        if (enemy.markForRemoval) {
           lane.removeEnemy(enemy);
         }
+      });
+    });
+  }
+
+  update() {
+    this.player.move();
+    this.lanes.forEach((lane) => {
+      lane.enemies.forEach((enemy) => {
         enemy.move();
       });
     });
