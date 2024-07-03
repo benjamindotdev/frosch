@@ -1,0 +1,161 @@
+:root {
+  --blue: #0d1b2a;
+  --silver: #e0e1dd;
+  --orange: #faa613;
+  --green: #c2f261;
+  --pink: #ea526f;
+  font-family: "Dela Gothic One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.5em;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Dela Gothic One", sans-serif;
+}
+
+body {
+  color: #e0e1dd;
+  background: #0d1b2a;
+}
+
+h1 {
+  color: #fff;
+}
+
+p {
+  color: var(--silver);
+  font-size: 1.5em;
+  line-height: 1.5em;
+  margin: 1em 0;
+}
+
+main {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  height: 800px;
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid #fff;
+  border-radius: 16px;
+}
+
+button {
+  background: #fff;
+  color: #000;
+  font-size: 1.5em;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #000;
+  color: #fff;
+}
+
+#game-intro {
+  background: var(--orange);
+}
+
+.intro__title {
+  font-size: 4em;
+}
+
+.intro__img {
+  width: 300px;
+  height: auto;
+}
+
+#game-container {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-stats {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1em;
+}
+
+.stats__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-screen {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.lane {
+  height: 100px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.enemy {
+  align-self: center;
+}
+
+.reverse {
+  transform: scaleX(-1);
+}
+
+#game-over {
+  display: none;
+  background-color: var(--pink);
+}
+
+#game-victory {
+  background-color: var(--green);
+}
+
+.game-over__img {
+  width: 300px;
+  height: auto;
+}
+
+#game-victory {
+  display: none;
+  padding: 50px;
+  border-radius: 16px;
+  background-color: var(--green);
+  color: var(--blue);
+}
+
+.gameVictory__img {
+  width: 300px;
+  height: auto;
+}
+
+.ghost {
+  opacity: 50%;
+}
