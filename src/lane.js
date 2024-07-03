@@ -6,6 +6,7 @@ class Lane {
     this.width = 800;
     this.element = document.querySelector("#lane-" + number);
     this.enemies = [];
+    this.enemySound = new Audio("../public/assets/sounds/enemy.wav");
   }
 
   enemy(type) {
@@ -14,6 +15,7 @@ class Lane {
   }
 
   addEnemy(randomPosition) {
+    this.enemySound.play();
     const direction = this.number % 2 === 0 ? -1 : 1;
     const enemy = new Enemy(
       this.element,
@@ -25,7 +27,7 @@ class Lane {
       direction
     );
     const enemyElement = document.createElement("img");
-    direction === -1 ? enemyElement.classList.add("reverse") : "";
+    direction === -1 ? (enemyElement.style.transform = "scaleX(-1)") : null;
     this.element.appendChild(enemyElement);
     this.enemies.push(enemy);
   }
@@ -33,8 +35,6 @@ class Lane {
   removeEnemy(enemy) {
     const index = this.enemies.indexOf(enemy);
     this.enemies.splice(index, 1);
-    console.log(this.element);
     this.element.removeChild(enemy.element);
-    console.log(this.element);
   }
 }

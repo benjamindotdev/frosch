@@ -1,12 +1,7 @@
 window.onload = function () {
-  const startSong = new Audio(
-    "./assets/sounds/T. Bless - Froggy Fraud Adventure.mp3"
-  );
+  const startSong = new Audio("../public/assets/sounds/menu.mp3");
   startSong.loop = true;
-  startSong.play();
-  const gameSong = new Audio(
-    "./assets/sounds/Ian Post - Breaking Point - No FX.mp3"
-  );
+
   const startButton = document.querySelector("#intro__button-start");
   const restartButtons = document.querySelectorAll(".end__button-restart");
   let game = null;
@@ -15,7 +10,6 @@ window.onload = function () {
     game = new Game();
     game.start();
     startSong.pause();
-    gameSong.play();
   });
 
   restartButtons.forEach((button) =>
@@ -24,13 +18,15 @@ window.onload = function () {
     })
   );
 
+  const movementSound = new Audio("../public/assets/sounds/side.wav");
+
   const handleKeyDown = (event) => {
     const key = event.key;
     const keyStrokes = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
 
     if (keyStrokes.includes(key)) {
       event.preventDefault();
-
+      movementSound.play();
       switch (key) {
         case "ArrowLeft":
           game.player.directionX = -1;

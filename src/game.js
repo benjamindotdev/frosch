@@ -6,15 +6,17 @@ class Game {
     this.gameOverScreen = document.querySelector("#game-over");
     this.gameVictoryScreen = document.querySelector("#game-victory");
     this.timeStat = document.querySelector("#stats__time");
+    this.levelStat = document.querySelector("#stats__level");
     this.laneElements = [];
     this.player = new Player(
       this.gameContainer,
       800,
       800,
-      100,
-      100,
+      42,
+      24,
       "./assets/images/player/Idle.gif"
     );
+    this.player.element.classList.add("player");
     this.height = 800;
     this.width = 800;
     this.lanes = [];
@@ -24,7 +26,11 @@ class Game {
     this.gameIsOver = false;
     this.gameIntervalId = null;
     this.gameLoopFrequency = Math.round(1000 / 60);
-    this.enemyLoopFrequency = Math.round(1000 / 2);
+    this.enemyLoopFrequency = Math.round(1000 / 10);
+    this.gameSong = new Audio("../public/assets/sounds/game-play.mp3");
+    this.victorySong = new Audio("../public/assets/sounds/victory.mp3");
+    this.gameOverSong = new Audio("../public/assets/sounds/game-over.mp3");
+    this.hitSound = new Audio("../public/assets/sounds/hit.mp3");
   }
 
   makeLanes() {
@@ -41,12 +47,13 @@ class Game {
 
   start() {
     const startAudio = document.createElement("audio");
-    startAudio.src = "./assets/Sounds/game-start-6104.mp3";
+    startAudio.src = "../public/assets/Sounds/game-start.mp3";
     this.gameContainer.style.width = this.width + "px";
     this.gameContainer.style.height = this.height + "px";
     this.startScreen.style.display = "none";
     this.gameContainer.style.display = "flex";
     this.makeLanes();
+    this.levelStat.textContent = this.level;
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
@@ -54,11 +61,12 @@ class Game {
       this.enemyLoop();
     }, this.enemyLoopFrequency);
     startAudio.play();
+    this.gameSong.play();
   }
 
   gameLoop() {
     this.timeStat.textContent = Math.floor(this.timeRemaining);
-    if (this.lives <= 0 || this.timeRemaining <= 0) {
+    if (this.timeRemaining <= 0) {
       this.endGame();
     } else if (this.player.top <= 125) {
       this.victory();
@@ -75,6 +83,7 @@ class Game {
       }
       lane.enemies.forEach((enemy) => {
         if (this.player.didCollide(enemy)) {
+          this.hitSound.play();
           this.player.top = 800;
           this.player.left = 400;
         }
@@ -95,6 +104,9 @@ class Game {
   }
 
   victory() {
+    this.gameSong.pause();
+    this.victorySong.play();
+    this.gameSong.play();
     this.playerHasWon = true;
     this.gameContainer.style.display = "none";
     this.gameVictoryScreen.style.display = "flex";
@@ -106,11 +118,15 @@ class Game {
       this.lanes = [];
       this.laneElements = [];
     });
-    this.level++;
+    this.level += 1;
+    this.levelStat.textContent = this.level;
     clearInterval(this.gameIntervalId);
   }
 
   endGame() {
+    this.gameSong.pause();
+    this.gameSong.currentTime = 0;
+    this.gameOverSong.play();
     this.gameIsOver = true;
     this.gameContainer.style.display = "none";
     this.gameOverScreen.style.display = "flex";
@@ -126,12 +142,13 @@ class Game {
   }
 
   restartGame() {
+    this.gameSong.play();
     this.player = new Player(
       this.gameContainer,
       800,
       800,
-      100,
-      100,
+      42,
+      24,
       "./assets/images/player/Idle.gif"
     );
     this.gameOverScreen.style.display = "none";

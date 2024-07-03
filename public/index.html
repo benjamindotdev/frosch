@@ -15,7 +15,7 @@
   </head>
   <body>
     <main>
-      <section id="game-intro">
+      <section id="game-intro" class="info-screen">
         <h1 class="intro__title">Frosch</h1>
         <img src="assets/images/player/Idle.gif" alt="" class="intro__img" />
         <button id="intro__button-start">Los geht's</button>
@@ -25,6 +25,10 @@
           <div class="stats__item">
             <span class="stats__label">Time</span>
             <span class="stats__value" id="stats__time"></span>
+          </div>
+          <div class="stats__item">
+            <span class="stats__label">Level</span>
+            <span class="stats__value" id="stats__level"></span>
           </div>
         </div>
         <div id="game-screen">
@@ -37,19 +41,19 @@
           <div class="screen__start"></div>
         </div>
       </section>
-      <section id="game-over">
+      <section id="game-over" class="info-screen">
         <h1 class="intro__title">Du bist schlecht</h1>
         <img src="assets/images/player/Death.gif" alt="" class="game-over" />
         <button class="end__button-restart">Nochmal</button>
       </section>
-      <section id="game-victory">
+      <section id="game-victory" class="info-screen">
         <h1 class="intro__title">Gut gemacht</h1>
         <img
           src="assets/images/player/Jump.gif"
           alt=""
           class="gameVictory__img"
         />
-        <button class="end__button-restart">Nochmal</button>
+        <button class="end__button-restart">Weiter</button>
       </section>
     </main>
     <script type="text/javascript" src="../src/component.js"></script>

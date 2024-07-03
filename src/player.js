@@ -3,7 +3,6 @@ class Player extends Component {
     super(container, width, height, left, top, updatePosition);
     this.directionX = 0;
     this.directionY = 0;
-    this.element;
     this.src = src;
   }
 
