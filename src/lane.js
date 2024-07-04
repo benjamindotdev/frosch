@@ -6,7 +6,7 @@ class Lane {
     this.width = 800;
     this.element = document.querySelector("#lane-" + number);
     this.enemies = [];
-    this.enemySound = new Audio("../public/assets/sounds/enemy.wav");
+    this.enemyIdCounter = 1;
   }
 
   enemy(type) {
@@ -16,32 +16,27 @@ class Lane {
     }`;
   }
 
-  addEnemy(randomPosition) {
-    //this.enemySound.play();
+  addEnemy() {
     const direction = this.number % 2 === 0 ? -1 : 1;
-    const containerRect = this.element.getBoundingClientRect();
-    const enemy = new Enemy(
-      this.element,
-      randomPosition
-        ? Math.random() * 800
-        : direction === -1
-        ? containerRect.right
-        : containerRect.left,
-      this.element.offsetTop + 10,
-      80,
-      80,
-      this.enemy(this.type),
-      direction
-    );
+    const enemySrc = this.enemy(this.type);
+    const enemy = new Enemy(this.element, enemySrc, direction);
     const enemyElement = document.createElement("img");
-    direction === -1 ? (enemyElement.style.transform = "scaleX(-1)") : null;
+    if (direction === -1) enemyElement.style.transform = "scaleX(-1)";
     this.element.appendChild(enemyElement);
+    enemyElement.id = `lane-${this.number}-enemy-${this.enemyIdCounter}`;
+    enemy.element.id = enemyElement.id;
     this.enemies.push(enemy);
+    this.enemyIdCounter++;
   }
 
-  removeEnemy(enemy) {
-    const index = this.enemies.indexOf(enemy);
-    this.enemies.splice(index, 1);
-    this.element.removeChild(enemy.element);
+  removeEnemies() {
+    this.enemies.forEach((enemy) => {
+      if (enemy.left < 0 || enemy.left > 720) {
+        const enemyElement = document.querySelector(`#${enemy.element.id}`);
+        if (enemyElement) this.element.removeChild(enemyElement);
+        this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
+        enemy.remove();
+      }
+    });
   }
 }

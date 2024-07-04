@@ -50,7 +50,6 @@ window.onload = function () {
 
     if (keyStrokes.includes(key)) {
       event.preventDefault();
-
       switch (key) {
         case "ArrowLeft":
           game.player.directionX = 0;

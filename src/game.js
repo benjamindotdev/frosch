@@ -7,7 +7,6 @@ class Game {
     this.gameVictoryScreen = document.querySelector("#game-victory");
     this.timeStat = document.querySelector("#stats__time");
     this.levelStat = document.querySelector("#stats__level");
-    this.laneElements = [];
     this.player = new Player(
       this.gameScreen,
       400,
@@ -26,7 +25,7 @@ class Game {
     this.gameIsOver = false;
     this.gameIntervalId = null;
     this.gameLoopFrequency = Math.round(1000 / 60);
-    this.enemyLoopFrequency = Math.round(1000 / 10);
+    this.enemyLoopFrequency = Math.round(1000 / 1);
     this.startSound = new Audio("../public/assets/sounds/game-start.mp3");
     this.gameSong = new Audio("../public/assets/sounds/game-play.mp3");
     this.victorySong = new Audio("../public/assets/sounds/victory.mp3");
@@ -59,20 +58,19 @@ class Game {
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
-    this.enemyLoopFrequency = setInterval(() => {
+    this.enemyInterval = setInterval(() => {
       this.enemyLoop();
     }, this.enemyLoopFrequency);
-    startAudio.play();
     this.gameSong.play();
   }
 
   gameLoop() {
-    this.timeStat.textContent = Math.floor(this.timeRemaining);
     if (this.timeRemaining <= 0) {
       this.endGame();
     } else if (this.player.top <= 125) {
       this.victory();
     } else {
+      this.timeStat.textContent = Math.floor(this.timeRemaining);
       this.update();
       this.timeRemaining -= 1 / 60;
     }
@@ -80,27 +78,24 @@ class Game {
 
   enemyLoop() {
     this.lanes.forEach((lane) => {
-      while (lane.enemies.length < this.level) {
-        lane.addEnemy(lane.enemies.length === 1 ? true : false);
+      if (lane.enemies.length < this.level) {
+        lane.addEnemy();
       }
-      lane.enemies.forEach((enemy) => {
-        if (this.player.didCollide(enemy)) {
-          this.hitSound.play();
-          this.player.top = 800;
-          this.player.left = 400;
-        }
-        if (enemy.markForRemoval) {
-          lane.removeEnemy(enemy);
-        }
-      });
     });
   }
 
   update() {
     this.player.move();
     this.lanes.forEach((lane) => {
+      lane.removeEnemies();
       lane.enemies.forEach((enemy) => {
-        enemy.move();
+        if (this.player.didCollide(enemy)) {
+          this.hitSound.play();
+          this.player.top = 800;
+          this.player.left = 400;
+        } else {
+          enemy.move();
+        }
       });
     });
   }
@@ -118,7 +113,6 @@ class Game {
         enemy.element.remove();
       });
       this.lanes = [];
-      this.laneElements = [];
     });
     this.level += 1;
     this.levelStat.textContent = this.level;
@@ -140,7 +134,6 @@ class Game {
         enemy.element.remove();
       });
       this.lanes = [];
-      this.laneElements = [];
     });
     clearInterval(this.gameIntervalId);
   }

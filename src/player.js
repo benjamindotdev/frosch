@@ -10,10 +10,6 @@ class Player extends Component {
     this.left += this.directionX * 10;
     this.top += this.directionY * 5;
 
-    const containerRect = this.container.getBoundingClientRect();
-    const containerLeftOffset = containerRect.left;
-    const containerTopOffset = containerRect.top;
-
     if (this.left < 0) {
       this.left = 0;
     }
@@ -37,15 +33,15 @@ class Player extends Component {
       : (this.element.style.transform = "scaleX(1)");
   }
 
-  didCollide(obstacle) {
+  didCollide(enemy) {
     const playerRect = this.element.getBoundingClientRect();
-    const obstacleRect = obstacle.element.getBoundingClientRect();
+    const enemyRect = enemy.element.getBoundingClientRect();
 
     if (
-      playerRect.left < obstacleRect.left + obstacleRect.width &&
-      playerRect.left + this.width > obstacleRect.left &&
-      playerRect.top < obstacleRect.top + obstacleRect.height &&
-      playerRect.top + this.height > obstacleRect.top
+      playerRect.left < enemyRect.left + enemyRect.width &&
+      playerRect.left + this.width > enemyRect.left &&
+      playerRect.top < enemyRect.top + enemyRect.height &&
+      playerRect.top + this.height > enemyRect.top
     ) {
       return true;
     }

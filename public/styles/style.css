@@ -100,8 +100,8 @@ button:hover {
 }
 
 #game-stats {
-  height: 10%;
-  width: 100%;
+  height: 100px;
+  width: 800px;
   background: #fff;
   display: flex;
   flex-direction: row;
@@ -122,8 +122,8 @@ button:hover {
 }
 
 #game-screen {
-  height: 90%;
-  width: 100%;
+  height: 900px;
+  width: 800px;
   background: #fff;
   display: flex;
   flex-direction: column;
@@ -137,14 +137,15 @@ button:hover {
 
 .lane {
   height: 100px;
-  width: 100%;
+  width: 800px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .enemy {
-  align-self: center;
+  height: auto;
+  width: 80px;
 }
 
 .reverse {
