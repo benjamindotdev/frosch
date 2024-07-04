@@ -113,6 +113,7 @@ class Game {
         enemy.element.remove();
       });
       this.lanes = [];
+      console.log(this.lanes.length);
     });
     this.level += 1;
     this.levelStat.textContent = this.level;

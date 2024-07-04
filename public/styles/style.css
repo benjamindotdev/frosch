@@ -169,6 +169,12 @@ button:hover {
   color: var(--blue);
 }
 
+.victory__title {
+  font-size: 4em;
+  color: var(--white);
+  filter: drop-shadow(10px 10px 0px var(--orange));
+}
+
 .gameVictory__img {
   width: 300px;
   height: auto;

@@ -21,9 +21,9 @@ class Lane {
     const enemySrc = this.enemy(this.type);
     const enemy = new Enemy(this.element, enemySrc, direction);
     const enemyElement = document.createElement("img");
-    if (direction === -1) enemyElement.style.transform = "scaleX(-1)";
     this.element.appendChild(enemyElement);
     enemyElement.id = `lane-${this.number}-enemy-${this.enemyIdCounter}`;
+    console.log(enemyElement.id);
     enemy.element.id = enemyElement.id;
     this.enemies.push(enemy);
     this.enemyIdCounter++;
@@ -34,8 +34,7 @@ class Lane {
       if (enemy.left < 0 || enemy.left > 720) {
         const enemyElement = document.querySelector(`#${enemy.element.id}`);
         if (enemyElement) this.element.removeChild(enemyElement);
-        this.enemies = this.enemies.filter((e) => e.id !== enemy.id);
-        enemy.remove();
+        this.enemies = this.enemies.filter((e) => e.element !== enemyElement);
       }
     });
   }

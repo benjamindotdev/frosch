@@ -12,6 +12,9 @@ class Enemy extends Component {
     this.element.style.height = this.height + "px";
     this.left = this.directionX === -1 ? 720 : 0;
     this.right = this.left + this.width;
+    this.directionX === -1
+      ? (this.element.style.transform = "scaleX(-1)")
+      : null;
   }
 
   move() {
