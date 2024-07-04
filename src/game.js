@@ -5,6 +5,7 @@ class Game {
     this.gameScreen = document.querySelector("#game-screen");
     this.gameOverScreen = document.querySelector("#game-over");
     this.gameVictoryScreen = document.querySelector("#game-victory");
+    this.highScoreStat = document.querySelector("#stats__highscore");
     this.timeStat = document.querySelector("#stats__time");
     this.levelStat = document.querySelector("#stats__level");
     this.player = new Player(
@@ -13,7 +14,7 @@ class Game {
       750,
       42,
       24,
-      "./assets/images/player/Idle.gif"
+      "public/assets/images/player/Idle.gif"
     );
     this.player.element.classList.add("player");
     this.height = 800;
@@ -21,17 +22,17 @@ class Game {
     this.lanes = [];
     this.timeRemaining = 60;
     this.level = 1;
+    this.highScore = localStorage.getItem("highScore") || this.level;
     this.playerHasWon = false;
     this.gameIsOver = false;
     this.gameIntervalId = null;
     this.gameLoopFrequency = Math.round(1000 / 60);
     this.enemyLoopFrequency = Math.round(1000 / 1);
-    this.startSound = new Audio("../public/assets/sounds/game-start.mp3");
-    this.gameSong = new Audio("../public/assets/sounds/game-play.mp3");
-    this.victorySong = new Audio("../public/assets/sounds/victory.mp3");
-    this.gameOverSong = new Audio("../public/assets/sounds/game-over.mp3");
-    this.hitSound = new Audio("../public/assets/sounds/hit.mp3");
-    this.highScore = 0;
+    this.startSound = new Audio("public/assets/sounds/game-start.mp3");
+    this.gameSong = new Audio("public/assets/sounds/game-play.mp3");
+    this.victorySong = new Audio("public/assets/sounds/victory.mp3");
+    this.gameOverSong = new Audio("public/assets/sounds/game-over.mp3");
+    this.hitSound = new Audio("public/assets/sounds/hit.mp3");
   }
 
   makeLanes() {
@@ -40,7 +41,7 @@ class Game {
       let type = types[Math.floor(Math.random() * types.length)];
       const lane = new Lane(i, type);
       const laneElement = document.querySelector(`#lane-${i}`);
-      laneElement.style.backgroundImage = `url("./assets/images/lanes/${lane.type}.png")`;
+      laneElement.style.backgroundImage = `url("public/assets/images/lanes/${lane.type}.png")`;
       this.lanes.push(lane);
       this.gameScreen.appendChild(laneElement);
     }
@@ -55,6 +56,7 @@ class Game {
     this.gameContainer.style.display = "flex";
     this.makeLanes();
     this.levelStat.textContent = this.level;
+    this.highScoreStat.textContent = this.highScore;
     this.gameIntervalId = setInterval(() => {
       this.gameLoop();
     }, this.gameLoopFrequency);
@@ -66,9 +68,17 @@ class Game {
 
   gameLoop() {
     if (this.timeRemaining <= 0) {
+      this.level > this.highScore
+        ? localStorage.setItem("highScore", this.highScore)
+        : null;
       this.endGame();
+      this.highScoreStat.textContent = this.level;
+      this.level = 1;
+      this.levelStat.textContent = this.level;
     } else if (this.player.top <= 125) {
       this.victory();
+      this.level++;
+      this.levelStat.textContent = this.level;
     } else {
       this.timeStat.textContent = Math.floor(this.timeRemaining);
       this.update();
@@ -113,9 +123,7 @@ class Game {
         enemy.element.remove();
       });
       this.lanes = [];
-      console.log(this.lanes.length);
     });
-    this.level += 1;
     this.levelStat.textContent = this.level;
     clearInterval(this.gameIntervalId);
   }
@@ -123,13 +131,41 @@ class Game {
   endGame() {
     this.gameSong.pause();
     this.gameSong.currentTime = 0;
+    if (this.level > this.highScore) {
+      this.highScore = this.level;
+      document
+        .querySelector("#game-over")
+        .classList.add("game-over--highscore");
+      document.querySelector("#game-over__title").textContent =
+        "Du hast gewonnen!";
+      document.querySelector("#game-over__highscore").textContent =
+        "High score: " + this.highScore;
+      document.querySelector("#game-over__score").textContent =
+        "New High Score!";
+      localStorage.setItem("highScore", this.highScore);
+    } else if (this.level === this.highScore) {
+      document.querySelector("#game-over").classList.add("game-over--normal");
+      document.querySelector("#game-over__title").textContent =
+        "Nicht schlecht!";
+      document.querySelector("#game-over__highscore").textContent =
+        this.highScore;
+      document.querySelector("#game-over__score").textContent =
+        "New High Score!";
+    } else {
+      document.querySelector("#game-over").classList.add("game-over--normal");
+      document.querySelector("#game-over__title").textContent =
+        "Du bist schlecht";
+      document.querySelector("#game-over__highscore").textContent =
+        "High score: " + this.highScore;
+      document.querySelector("#game-over__score").textContent =
+        "Your score " + this.level;
+    }
+
     this.gameOverSong.play();
     this.gameIsOver = true;
     this.gameContainer.style.display = "none";
     this.gameOverScreen.style.display = "flex";
     this.player.element.remove();
-    this.level > this.highScore ? (this.highScore = this.level) : null;
-    this.level = 1;
     this.lanes.forEach((lane) => {
       lane.enemies.forEach((enemy) => {
         enemy.element.remove();
@@ -140,6 +176,7 @@ class Game {
   }
 
   restartGame() {
+    this.gameOverSong.pause();
     this.startSound.play();
     this.gameSong.play();
     this.player = new Player(
@@ -148,11 +185,13 @@ class Game {
       750,
       42,
       24,
-      "./assets/images/player/Idle.gif"
+      "public/assets/images/player/Idle.gif"
     );
     this.gameOverScreen.style.display = "none";
     this.gameVictoryScreen.style.display = "none";
     this.gameContainer.style.display = "flex";
+    this.levelStat.textContent = this.level;
+    this.highScoreStat.textContent = this.highScore;
     this.timeRemaining = 60;
     this.gameIsOver = false;
     this.gameIntervalId = setInterval(() => {

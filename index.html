@@ -3,8 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="assets/images/player/Idle.gif" />
-    <link rel="stylesheet" href="styles/style.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="public/assets/images/player/Idle.gif"
+    />
+    <link rel="stylesheet" href="public/styles/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,11 +21,19 @@
     <main>
       <section id="game-intro" class="info-screen">
         <h1 class="intro__title">Frosch</h1>
-        <img src="assets/images/player/Idle.gif" alt="" class="intro__img" />
+        <img
+          src="public/assets/images/player/Idle.gif"
+          alt=""
+          class="intro__img"
+        />
         <button type="button" id="intro__button-start">Los geht's</button>
       </section>
       <section id="game-container">
         <div id="game-stats">
+          <div class="stats__item">
+            <span class="stats__label">Highscore</span>
+            <span class="stats__value" id="stats__highscore"></span>
+          </div>
           <div class="stats__item">
             <span class="stats__label">Time</span>
             <span class="stats__value" id="stats__time"></span>
@@ -42,25 +54,28 @@
         </div>
       </section>
       <section id="game-over" class="info-screen">
-        <h1 class="intro__title">Du bist schlecht</h1>
-        <img src="assets/images/player/Death.gif" alt="" class="game-over" />
+        <h1 id="game-over__title"></h1>
+        <div class="game-over__scores">
+          <p id="game-over__highscore"></p>
+          <p id="game-over__score"></p>
+        </div>
         <button class="end__button-restart">Nochmal</button>
       </section>
       <section id="game-victory" class="info-screen">
         <h1 class="victory__title">Gut gemacht</h1>
         <img
-          src="assets/images/player/Jump.gif"
+          src="public/assets/images/player/Jump.gif"
           alt=""
           class="gameVictory__img"
         />
         <button class="end__button-restart">Weiter</button>
       </section>
     </main>
-    <script type="text/javascript" src="../src/component.js"></script>
-    <script type="text/javascript" src="../src/player.js"></script>
-    <script type="text/javascript" src="../src/enemy.js"></script>
-    <script type="text/javascript" src="../src/lane.js"></script>
-    <script type="text/javascript" src="../src/game.js"></script>
-    <script type="text/javascript" src="../src/script.js"></script>
+    <script type="text/javascript" src="src/component.js"></script>
+    <script type="text/javascript" src="src/player.js"></script>
+    <script type="text/javascript" src="src/enemy.js"></script>
+    <script type="text/javascript" src="src/lane.js"></script>
+    <script type="text/javascript" src="src/game.js"></script>
+    <script type="text/javascript" src="src/script.js"></script>
   </body>
 </html>

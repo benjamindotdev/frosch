@@ -1,5 +1,5 @@
 window.onload = function () {
-  const startSong = new Audio("../public/assets/sounds/menu.mp3");
+  const startSong = new Audio("public/assets/sounds/menu.mp3");
   startSong.loop = true;
 
   const startButton = document.querySelector("#intro__button-start");
@@ -18,7 +18,7 @@ window.onload = function () {
     })
   );
 
-  const movementSound = new Audio("../public/assets/sounds/side.wav");
+  const movementSound = new Audio("public/assets/sounds/side.wav");
 
   const handleKeyDown = (event) => {
     const key = event.key;

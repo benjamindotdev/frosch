@@ -7,7 +7,7 @@
   font-family: "Dela Gothic One", sans-serif;
   font-weight: 400;
   font-style: normal;
-  letter-spacing: 0.5em;
+  letter-spacing: 0.5rem;
 }
 
 * {
@@ -27,9 +27,9 @@ h1 {
 
 p {
   color: var(--silver);
-  font-size: 1.5em;
-  line-height: 1.5em;
-  margin: 1em 0;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  margin: 1rem 0;
 }
 
 main {
@@ -64,9 +64,9 @@ button {
   background: var(--orange);
   color: #000;
   font-size: 1.5em;
-  padding: 1em 2em;
+  padding: 1rem 2rem;
   border: none;
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -82,7 +82,7 @@ button:hover {
 }
 
 .intro__title {
-  font-size: 4em;
+  font-size: 4rem;
   color: var(--green);
   filter: drop-shadow(10px 10px 0px var(--blue));
 }
@@ -103,13 +103,14 @@ button:hover {
   height: 100px;
   width: 800px;
   background: #fff;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .stats__label {
-  font-size: 0.5em;
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .stats__item {
@@ -118,7 +119,7 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 2em;
+  font-size: 2rem;
 }
 
 #game-screen {
@@ -154,7 +155,16 @@ button:hover {
 
 #game-over {
   display: none;
+}
+
+.game-over--highscore {
+  background-color: var(--green);
+  filter: drop-shadow(10px 10px 0px var(--orange));
+}
+
+.game-over--normal {
   background-color: var(--pink);
+  filter: drop-shadow(10px 10px 0px var(--orange));
 }
 
 .game-over__img {
@@ -169,8 +179,11 @@ button:hover {
   color: var(--blue);
 }
 
+#game-over__title {
+  filter: drop-shadow(10px 10px 0px var(--blue));
+}
+
 .victory__title {
-  font-size: 4em;
   color: var(--white);
   filter: drop-shadow(10px 10px 0px var(--orange));
 }

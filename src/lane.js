@@ -11,7 +11,7 @@ class Lane {
 
   enemy(type) {
     const random = Math.ceil(Math.random() * 3);
-    return `./assets/images/enemies/${type}/${random}.${
+    return `public/assets/images/enemies/${type}/${random}.${
       type === "pavement" ? "gif" : "png"
     }`;
   }
@@ -23,7 +23,6 @@ class Lane {
     const enemyElement = document.createElement("img");
     this.element.appendChild(enemyElement);
     enemyElement.id = `lane-${this.number}-enemy-${this.enemyIdCounter}`;
-    console.log(enemyElement.id);
     enemy.element.id = enemyElement.id;
     this.enemies.push(enemy);
     this.enemyIdCounter++;
