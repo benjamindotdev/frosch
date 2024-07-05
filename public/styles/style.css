@@ -155,16 +155,21 @@ button:hover {
 
 #game-over {
   display: none;
+  color: #fff;
 }
 
 .game-over--highscore {
   background-color: var(--green);
-  filter: drop-shadow(10px 10px 0px var(--orange));
+  color: var(--blue);
 }
 
 .game-over--normal {
   background-color: var(--pink);
-  filter: drop-shadow(10px 10px 0px var(--orange));
+  color: #fff;
+}
+
+.game-over__scores {
+  color: var(--blue);
 }
 
 .game-over__img {
@@ -180,7 +185,19 @@ button:hover {
 }
 
 #game-over__title {
-  filter: drop-shadow(10px 10px 0px var(--blue));
+  color: var(--blue);
+}
+
+#game-over__scores {
+  color: var(--blue);
+}
+
+#game-over__highscore {
+  color: var(--blue);
+}
+
+#game-over__score {
+  color: var(--blue);
 }
 
 .victory__title {
