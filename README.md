@@ -44,8 +44,8 @@ Frosch is an exciting and interactive browser game where players control a frog 
 
 ## Assets
 
-- **Sounds**: Background music and sound effects are located in the `./assets/sounds/` directory.
-- **Images**: Lane textures and frog animations are stored in the `./assets/PNG/` and `./assets/Froggo/Gifs/` directories, respectively.
+- **Sounds**: Background music and sound effects are located in the `public/assets/sounds/` directory.
+- **Images**: Lane textures and frog animations are stored in the `public/assets/lanes/` and `public/assets/player/` directories, respectively.
 
 ## License
 
