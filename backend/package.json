@@ -1,0 +1,23 @@
+{
+  "name": "frosch",
+  "version": "1.0.0",
+  "description": "Backend for frosch game",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjamindotdev/frosch-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjamindotdev/frosch-backend/issues"
+  },
+  "homepage": "https://github.com/benjamindotdev/frosch-backend#readme",
+  "dependencies": {
+    "@prisma/client": "^5.20.0",
+    "pg": "^8.13.0"
+  }
+}

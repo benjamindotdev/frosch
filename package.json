@@ -1,0 +1,15 @@
+{
+  "name": "frosch",
+  "version": "1.0.0",
+  "description": "Frosch is an exciting and interactive browser game where players control a frog trying to navigate various lanes filled with obstacles. The goal is to reach the top of the screen without running out of time or lives.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon backend/app.js"
+  },
+  "author": "benjamin.dev",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "nodemon": "^3.1.7"
+  }
+}
