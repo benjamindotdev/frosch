@@ -56,6 +56,6 @@ This project is licensed under the MIT License.
 - Game concept inspired by Frogger and other classic arcade games.
 - Music by T. Bless and Ian Post.
 
-Enjoy playing Frosch!
+Enjoy playing Frosch @ https://playfrosch.netlify.app
 
 ---
