@@ -4,12 +4,20 @@
   "description": "Frosch is an exciting and interactive browser game where players control a frog trying to navigate various lanes filled with obstacles. The goal is to reach the top of the screen without running out of time or lives.",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon backend/app.js"
+    "start": "nodemon backend/app.js",
+    "build": "webpack"
   },
   "author": "benjamin.dev",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.7.7",
     "nodemon": "^3.1.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.8",
+    "@babel/preset-env": "^7.25.8",
+    "babel-loader": "^9.2.1",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
   }
 }
