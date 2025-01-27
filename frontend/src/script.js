@@ -1,4 +1,15 @@
 window.onload = async function () {
+  const scores = fetch("/scores")
+    .then((response) => response.json())
+    .then((data) => {
+      const highScoresList = document.querySelector("#high-scores");
+      data.forEach((score) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${score.name}: ${score.score}`;
+        highScoresList.appendChild(listItem);
+      });
+    });
+  console.log(scores);
   const startSong = new Audio("public/assets/sounds/menu.mp3");
   startSong.loop = true;
 
