@@ -10,11 +10,11 @@ const app = express();
 
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "../frontend")));
+app.use(express.static(path.join(__dirname, "../frontend/frontend/dist")));
 
 app.get("/", (req, res) => {
   console.log("GET /");
-  res.sendFile(path.join(__dirname, "../frontend", "index.html"));
+  res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
 app.post("/score", async (req, res) => {
